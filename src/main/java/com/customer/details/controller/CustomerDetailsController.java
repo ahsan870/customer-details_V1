@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,13 +18,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.customer.details.entity.CustomerEntity;
 import com.customer.details.models.CustomerRequest;
 import com.customer.details.models.CustomerResponse;
 import com.customer.details.services.CustomerService;
 import com.customer.details.transformer.CustomerTransformer;
-
+import com.customer.details.utils.EmailUtil;
 import io.swagger.annotations.Api;
 
 @RestController
@@ -32,12 +32,23 @@ import io.swagger.annotations.Api;
 public class CustomerDetailsController {
 
 	private static final String MESSAGE = "Customer With phone number ";
+	private static final String SUBJECT = "Customer data has been Saved!!! ";
+	private static final String BODY = "Customar Account has been created succcessfully with Customer ID is: ";
+//
+//	@Value("${customer.email.subject:}")
+//	public String emailSubjectText;
+//	@Value("${customer.email.body:}")
+//	public String emailBodyText;
+//	
 
 	@Autowired
 	private CustomerService service;
 
 	@Autowired
 	private CustomerTransformer transformer;
+
+	@Autowired
+	private EmailUtil email;
 
 	@PostMapping(path = "/create", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<CustomerResponse> createCustomer(@Valid @RequestBody CustomerRequest customerRequest) {
@@ -46,12 +57,16 @@ public class CustomerDetailsController {
 		if (customerEntity == null) {
 			String customerId = service.saveCustomer(transformer.transformCustomerRequest(customerRequest));
 			CustomerResponse response = new CustomerResponse(
-					"Customer requested With phone number " + customerRequest.getPhoneNumber() + " created Successfully"
+					"Customer requested With phone number " + customerRequest.getPhoneNumber() + " created Successfully "
 							+ "With CustomerId is:: " + customerId);
+			
+			email.sendEmail(customerRequest.getMailId(), SUBJECT, BODY + customerId);
 			return new ResponseEntity<>(response, HttpStatus.CREATED);
 		} else {
 			CustomerResponse response = new CustomerResponse(
 					"Customer requested With phone number " + customerRequest.getPhoneNumber() + " already exist");
+
+		
 			return new ResponseEntity<>(response, HttpStatus.CREATED);
 		}
 

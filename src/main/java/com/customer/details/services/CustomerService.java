@@ -2,8 +2,10 @@ package com.customer.details.services;
 
 import java.util.List;
 
-import com.customer.details.entity.CustomerEntity;
+import org.springframework.stereotype.Service;
 
+import com.customer.details.entity.CustomerEntity;
+@Service
 public interface CustomerService {
 
 	public String saveCustomer(CustomerEntity customerEntity);
