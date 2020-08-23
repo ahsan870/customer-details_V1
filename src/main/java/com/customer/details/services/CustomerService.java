@@ -12,13 +12,13 @@ public interface CustomerService {
 
 	public List<CustomerEntity> getAll();
 
-	public CustomerEntity findByPhoneNumber(String phoneNumber);
+	public CustomerEntity findByCustomerId(String customerId);
 
-	public void deleteCustomerByPhoneNumber(String phoneNumber);
+	public void deleteCustomerByCustomerId(String customerId);
 
-	public void updateCustomer(CustomerEntity customerEntity, String phoneNumber);
+	public void updateCustomer(CustomerEntity customerEntity, String customerId);
 
-	public boolean isCustomerAlreadyExists(String phoneNumber);
+	public boolean isCustomerAlreadyExists(String customerId);
 
 	public boolean isCustomerAlreadyExistsByCustomerId(String customerId);
 

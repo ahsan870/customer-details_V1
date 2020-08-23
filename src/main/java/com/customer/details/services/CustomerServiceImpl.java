@@ -31,8 +31,8 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public CustomerEntity findByPhoneNumber(String phoneNumber) {
-		CustomerEntity customerEntity = customerRepository.findByPhoneNumber(phoneNumber);
+	public CustomerEntity findByCustomerId(String customerId) {
+		CustomerEntity customerEntity = customerRepository.findByCustomerId(customerId);
 		if (customerEntity != null) {
 			return customerEntity;
 		} else {
@@ -41,31 +41,30 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public void deleteCustomerByPhoneNumber(String phoneNumber) {
-		customerRepository.deleteCustomerByPhoneNumber(phoneNumber);
+	public void deleteCustomerByCustomerId(String customerId) {
+		customerRepository.deleteCustomerByCustomerId(customerId);
 
 	}
 
 	@Override
-	public void updateCustomer(CustomerEntity customerEntity, String phoneNumber) {
+	public void updateCustomer(CustomerEntity customerEntity, String customerId) {
 
-		CustomerEntity entity = customerRepository.findByPhoneNumber(phoneNumber);
+		CustomerEntity entity = customerRepository.findByCustomerId(customerId);
 		if (entity != null) {
 			entity.setFirstName(customerEntity.getFirstName());
 			entity.setLastName(customerEntity.getLastName());
 			entity.setMailId(customerEntity.getMailId());
-			entity.setPhoneNumber(phoneNumber);
+			entity.setCustomerId(customerId);
 			customerRepository.save(entity);
 		} else {
-			customerEntity.setPhoneNumber(phoneNumber);
 			customerRepository.save(customerEntity);
 		}
 
 	}
 
 	@Override
-	public boolean isCustomerAlreadyExists(String phoneNumber) {
-		return customerRepository.countByPhoneNumber(phoneNumber) > 0;
+	public boolean isCustomerAlreadyExists(String customerId) {
+		return customerRepository.countByCustomerId(customerId) > 0;
 	}
 
 	@Override

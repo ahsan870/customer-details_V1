@@ -15,6 +15,10 @@ public class CustomerTransformer {
 		customerEntity.setLastName(request.getLastName());
 		customerEntity.setMailId(request.getMailId());
 		customerEntity.setPhoneNumber(request.getPhoneNumber());
+		customerEntity.setCity(request.getCity());
+		customerEntity.setCountry(request.getCountry());
+		customerEntity.setPostalCode(request.getPostalCode());
+		customerEntity.setState(request.getState());
 		return customerEntity;
 
 	}
@@ -26,6 +30,10 @@ public class CustomerTransformer {
 		response.setLastName(customerEntity.getLastName());
 		response.setMailId(customerEntity.getMailId());
 		response.setPhoneNumber(customerEntity.getPhoneNumber());
+		response.setCity(customerEntity.getCity());
+		response.setCountry(customerEntity.getCountry());
+		response.setPostalCode(customerEntity.getPostalCode());
+		response.setState(customerEntity.getState());
 		return response;
 
 	}

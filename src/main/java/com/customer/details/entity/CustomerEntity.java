@@ -35,6 +35,56 @@ public class CustomerEntity {
 	@NotBlank
 	@Column(name = "PHONE_NUMBER" , nullable = false)
 	private String phoneNumber;
+	
+	@NotBlank
+	@Column(name = "city")
+	private String city;
+	
+	@NotBlank
+	@Column(name = "postalCode")
+	private String postalCode;
+	
+	@NotBlank
+	@Column(name = "state")
+	private String state;
+	
+	@NotBlank
+	@Column(name = "country")
+	private String country;
+	
+
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getPostalCode() {
+		return postalCode;
+	}
+
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
 
 	public Long getId() {
 		return id;
@@ -76,11 +126,6 @@ public class CustomerEntity {
 		this.phoneNumber = phoneNumber;
 	}
 
-	@Override
-	public String toString() {
-		return "CustomerEntity [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", mailId=" + mailId
-				+ ", phoneNumber=" + phoneNumber + "]";
-	}
 
 	public String getCustomerId() {
 		return customerId;
@@ -89,4 +134,13 @@ public class CustomerEntity {
 	public void setCustomerId(String customerId) {
 		this.customerId = customerId;
 	}
+
+	@Override
+	public String toString() {
+		return "CustomerEntity [id=" + id + ", customerId=" + customerId + ", firstName=" + firstName + ", lastName="
+				+ lastName + ", mailId=" + mailId + ", phoneNumber=" + phoneNumber + ", city=" + city + ", postalCode="
+				+ postalCode + ", state=" + state + ", country=" + country + "]";
+	}
+	
+	
 }

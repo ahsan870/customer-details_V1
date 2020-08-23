@@ -13,17 +13,15 @@ import com.customer.details.entity.CustomerEntity;
 @Repository
 public interface CustomerRepository extends JpaRepository<CustomerEntity, Long> {
 
-	@Query(value = "SELECT c FROM CustomerEntity c WHERE c.phoneNumber = :phoneNumber")
+	@Query(value = "SELECT c FROM CustomerEntity c WHERE c.customerId = :customerId")
 	@Transactional
-	CustomerEntity findByPhoneNumber(@Param("phoneNumber") String phoneNumber);
+	CustomerEntity findByCustomerId(@Param("customerId") String customerId);
 
-	@Query(value = "Delete FROM CustomerEntity c WHERE c.phoneNumber = :phoneNumber")
+	@Query(value = "Delete FROM CustomerEntity c WHERE c.customerId = :customerId")
 	@Modifying
 	@Transactional
-	void deleteCustomerByPhoneNumber(@Param(value = "phoneNumber") String phoneNumber);
+	void deleteCustomerByCustomerId(@Param(value = "customerId") String customerId);
 
-	public long countByPhoneNumber(String phoneNumber);
-
-	int countByCustomerId(String customerId);
+	public long countByCustomerId(String customerId);
 
 }
